@@ -32,4 +32,13 @@ public class StateCensusAnalyserTest {
             Assert.assertEquals(StateCensusAnalyserException.ExceptionType.NO_SUCH_FILE, e.type);
         }
     }
+
+    @Test
+    public void GivenTheStateCSVFile_WhenCorrectBut_DelimiterIncorrect_ReturnsCustomException() {
+        try {
+            int result = StateCensusAnalyser.findStateCount(CSV_STATE_CENSUS_DATA_PATH);
+            Assert.assertEquals(29, result);
+        } catch (StateCensusAnalyserException e) {
+        }
+    }
 }

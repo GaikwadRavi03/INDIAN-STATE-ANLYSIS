@@ -18,6 +18,7 @@ public class StateCensusAnalyser {
             CsvToBean<CSVStateCensus> csvToBean = new CsvToBeanBuilder(reader)
                     .withType(CSVStateCensus.class)
                     .withIgnoreLeadingWhiteSpace(true)
+                    .withSeparator(',')
                     .build();
 
             Iterator<CSVStateCensus> csvStateIterator = csvToBean.iterator();
