@@ -41,4 +41,13 @@ public class StateCensusAnalyserTest {
         } catch (StateCensusAnalyserException e) {
         }
     }
+
+    @Test
+    public void GivenTheStateCSVFile_WhenCorrectButcsvHeader_IncorrectReturns_CustomException() {
+        try {
+            int result = StateCensusAnalyser.findStateCount(CSV_STATE_CENSUS_DATA_PATH);
+            Assert.assertEquals(29, result);
+        } catch (StateCensusAnalyserException e) {
+        }
+    }
 }
