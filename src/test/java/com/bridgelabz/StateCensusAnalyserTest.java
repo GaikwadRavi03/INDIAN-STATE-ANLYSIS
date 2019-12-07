@@ -8,10 +8,18 @@ public class StateCensusAnalyserTest {
 
     @Test
     public void givenTheStatesCSV_fileCheckToEnsure_TheNumberOfRecord_matches() {
-
         try {
-            boolean result = StateCensusAnalyser.findStateCount(29,CSV_STATE_CENSUS_DATA_PATH);
-            Assert.assertTrue(result);
+            int result = StateCensusAnalyser.findStateCount(CSV_STATE_CENSUS_DATA_PATH);
+            Assert.assertEquals(29, result);
+        } catch (StateCensusAnalyserException e) {
+        }
+    }
+
+    @Test
+    public void givenState_CSVFileIfIncorrect_Returns_CustomException() {
+        try {
+            int result = StateCensusAnalyser.findStateCount(CSV_STATE_CENSUS_DATA_PATH);
+            Assert.assertEquals(29, result);
         } catch (StateCensusAnalyserException e) {
         }
     }

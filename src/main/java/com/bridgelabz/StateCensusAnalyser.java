@@ -11,9 +11,8 @@ import java.nio.file.Paths;
 import java.util.Iterator;
 
 public class StateCensusAnalyser {
-    private static int count = 0;
-
-    public static boolean findStateCount(int expected,String filePath) throws StateCensusAnalyserException {
+    public static int findStateCount(String filePath) throws StateCensusAnalyserException {
+        int count = 0;
         try {
             Reader reader = Files.newBufferedReader(Paths.get(filePath));
             CsvToBean<CSVStateCensus> csvToBean = new CsvToBeanBuilder(reader)
@@ -32,9 +31,6 @@ public class StateCensusAnalyser {
                 System.out.println("==========================");
                 count++;
             }
-
-            if (expected == count)
-                return true;
         } catch (NoSuchFileException e) {
             throw new StateCensusAnalyserException("Please Enter Valid File");
         } catch (IOException e) {
@@ -44,6 +40,6 @@ public class StateCensusAnalyser {
         } catch (RuntimeException e) {
             throw new StateCensusAnalyserException("Please Enter Valid File path", StateCensusAnalyserException.ExceptionType.NO_SUCH_FILE);
         }
-        return false;
+        return count;
     }
 }
