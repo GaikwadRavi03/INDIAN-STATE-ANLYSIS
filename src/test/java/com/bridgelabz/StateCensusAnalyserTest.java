@@ -50,4 +50,13 @@ public class StateCensusAnalyserTest {
         } catch (StateCensusAnalyserException e) {
         }
     }
+
+    @Test
+    public void GivenMessageShould_ReturnHappyMessage_ForSortState_Alphabetical() {
+        try {
+            int result = StateCensusAnalyser.findStateCount(CSV_STATE_CENSUS_DATA_PATH);
+        } catch (StateCensusAnalyserException e) {
+            Assert.assertEquals(StateCensusAnalyserException.ExceptionType.NO_SUCH_FILE, e.type);
+        }
+    }
 }
