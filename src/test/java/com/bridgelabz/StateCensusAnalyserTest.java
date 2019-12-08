@@ -76,8 +76,8 @@ public class StateCensusAnalyserTest {
     @Test
     public void GivenStateCSV_FileForSortPopulation_ShouldReturnLowestPopulatedState() {
         try {
-            List<CSVStateCensus> result = StateCensusAnalyser.bubbleSort("getState", CSV_STATE_CENSUS_DATA_PATH);
-            Assert.assertEquals("Uttar Pradesh", result.get(0).getState());
+            List<CSVStateCensus> result = StateCensusAnalyser.bubbleSort("getPopulation", CSV_STATE_CENSUS_DATA_PATH);
+            Assert.assertEquals("Uttarakhand", result.get(0).getState());
         } catch (StateCensusAnalyserException | IOException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
         }
     }
@@ -85,8 +85,8 @@ public class StateCensusAnalyserTest {
     @Test
     public void GivenStateCSV_FileForSortPopulation_ShouldReturnHighestPopulatedState() {
         try {
-            List<CSVStateCensus> result = StateCensusAnalyser.bubbleSort("getState", CSV_STATE_CENSUS_DATA_PATH);
-            Assert.assertEquals("Sikkim", result.get(result.size() - 1).getState());
+            List<CSVStateCensus> result = StateCensusAnalyser.bubbleSort("getPopulation", CSV_STATE_CENSUS_DATA_PATH);
+            Assert.assertEquals("West Bengal", result.get(result.size() - 1).getState());
         } catch (StateCensusAnalyserException | IOException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
         }
     }
@@ -113,8 +113,8 @@ public class StateCensusAnalyserTest {
     @Test
     public void GivenStateCSV_FileFor_RefactorSortPopulation_ShouldReturnLowestPopulatedState() {
         try {
-            List<CSVStateCensus> result = StateCensusAnalyser.bubbleSort("getState", CSV_STATE_CENSUS_DATA_PATH);
-            Assert.assertEquals("Uttar Pradesh", result.get(0).getState());
+            List<CSVStateCensus> result = StateCensusAnalyser.bubbleSort("getPopulation", CSV_STATE_CENSUS_DATA_PATH);
+            Assert.assertEquals("Uttarakhand", result.get(0).getState());
         } catch (StateCensusAnalyserException | IOException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
         }
     }
@@ -122,7 +122,26 @@ public class StateCensusAnalyserTest {
     @Test
     public void GivenStateCSV_FileFor_RefactorSortPopulation_ShouldReturnHighestPopulatedState() {
         try {
-            List<CSVStateCensus> result = StateCensusAnalyser.bubbleSort("getState", CSV_STATE_CENSUS_DATA_PATH);
+            List<CSVStateCensus> result = StateCensusAnalyser.bubbleSort("getPopulation", CSV_STATE_CENSUS_DATA_PATH);
+            Assert.assertEquals("West Bengal", result.get(result.size() - 1).getState());
+        } catch (StateCensusAnalyserException | IOException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+        }
+    }
+
+    //----------density
+    @Test
+    public void GivenStateCSV_FileFor_RefactorSortDensity_ShouldReturnLowestState() {
+        try {
+            List<CSVStateCensus> result = StateCensusAnalyser.bubbleSort("getDensityPerSqKm", CSV_STATE_CENSUS_DATA_PATH);
+            Assert.assertEquals("Arunachal Pradesh", result.get(0).getState());
+        } catch (StateCensusAnalyserException | IOException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+        }
+    }
+
+    @Test
+    public void GivenStateCSV_FileFor_RefactorSortDensity_ShouldReturnHighestState() {
+        try {
+            List<CSVStateCensus> result = StateCensusAnalyser.bubbleSort("getDensityPerSqKm", CSV_STATE_CENSUS_DATA_PATH);
             Assert.assertEquals("Sikkim", result.get(result.size() - 1).getState());
         } catch (StateCensusAnalyserException | IOException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
         }

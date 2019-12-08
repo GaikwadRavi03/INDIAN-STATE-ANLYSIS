@@ -38,7 +38,7 @@ public class StateCensusAnalyser<T extends Comparable<T>> {
         return list;
     }
 
-    public static <T> List<CSVStateCensus> bubbleSort(String filepath, String methodName) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, IOException, StateCensusAnalyserException {
+    public static <T> List<CSVStateCensus> bubbleSort( String methodName,String filepath) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, IOException, StateCensusAnalyserException {
         List<CSVStateCensus> csvCensusList = findStateCount(filepath);
         for (int i = 0; i < csvCensusList.size() - 1; i++) {
             for (int j = 0; j < csvCensusList.size() - i - 1; j++) {
