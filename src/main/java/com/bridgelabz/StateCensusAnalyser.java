@@ -7,14 +7,15 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
-import java.util.Iterator;
 import java.util.List;
 
-public class StateCensusAnalyser {
-    public static List<CSVStateCensus> findStateCount(String filePath) throws StateCensusAnalyserException {
+public class StateCensusAnalyser<T extends Comparable<T>> {
+    public static <T> List<CSVStateCensus> findStateCount(String filePath) throws StateCensusAnalyserException {
         List<CSVStateCensus> list = null;
         int count = 0;
         try {
@@ -37,26 +38,17 @@ public class StateCensusAnalyser {
         return list;
     }
 
-    public static List<CSVStateCensus> bubbleSort(String filePath) throws IOException, StateCensusAnalyserException {
-        List<CSVStateCensus> csvCensusList = findStateCount(filePath);
+    public static <T> List<CSVStateCensus> bubbleSort(String filepath, String methodName) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, IOException, StateCensusAnalyserException {
+        List<CSVStateCensus> csvCensusList = findStateCount(filepath);
         for (int i = 0; i < csvCensusList.size() - 1; i++) {
             for (int j = 0; j < csvCensusList.size() - i - 1; j++) {
-                if (csvCensusList.get(j).getState().compareTo(csvCensusList.get(j + 1).getState()) > 0) {
-                    CSVStateCensus tempObj = csvCensusList.get(j);
-                    csvCensusList.set(j, csvCensusList.get(j + 1));
-                    csvCensusList.set(j + 1, tempObj);
-                }
-            }
-        }
-        writeInGson(csvCensusList);
-        return csvCensusList;
-    }
-
-    public static List<CSVStateCensus> bubbleSortPopulation(String filePath) throws IOException, StateCensusAnalyserException {
-        List<CSVStateCensus> csvCensusList = findStateCount(filePath);
-        for (int i = 0; i < csvCensusList.size() - 1; i++) {
-            for (int j = 0; j < csvCensusList.size() - i - 1; j++) {
-                if (csvCensusList.get(j).getPopulation() < csvCensusList.get(j + 1).getPopulation()) {
+                Class class1 = csvCensusList.get(j).getClass();
+                Method methodCall = class1.getDeclaredMethod(methodName);
+                T value1 = (T) methodCall.invoke(csvCensusList.get(j));
+                Class class2 = csvCensusList.get(j + 1).getClass();
+                Method methodCall1 = class2.getDeclaredMethod(methodName);
+                T value2 = (T) methodCall1.invoke(csvCensusList.get(j + 1));
+                if (value1.toString().compareTo(value2.toString()) > 0) {
                     CSVStateCensus tempObj = csvCensusList.get(j);
                     csvCensusList.set(j, csvCensusList.get(j + 1));
                     csvCensusList.set(j + 1, tempObj);
