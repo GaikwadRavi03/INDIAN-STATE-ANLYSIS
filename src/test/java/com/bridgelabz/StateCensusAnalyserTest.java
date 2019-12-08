@@ -130,7 +130,7 @@ public class StateCensusAnalyserTest {
 
     //----------density
     @Test
-    public void GivenStateCSV_FileFor_RefactorSortDensity_ShouldReturnLowestState() {
+    public void GivenStateCSV_FileFor_SortDensity_ShouldReturnLowestState() {
         try {
             List<CSVStateCensus> result = StateCensusAnalyser.bubbleSort("getDensityPerSqKm", CSV_STATE_CENSUS_DATA_PATH);
             Assert.assertEquals("Arunachal Pradesh", result.get(0).getState());
@@ -139,10 +139,29 @@ public class StateCensusAnalyserTest {
     }
 
     @Test
-    public void GivenStateCSV_FileFor_RefactorSortDensity_ShouldReturnHighestState() {
+    public void GivenStateCSV_FileFor_SortDensity_ShouldReturnHighestState() {
         try {
             List<CSVStateCensus> result = StateCensusAnalyser.bubbleSort("getDensityPerSqKm", CSV_STATE_CENSUS_DATA_PATH);
             Assert.assertEquals("Sikkim", result.get(result.size() - 1).getState());
+        } catch (StateCensusAnalyserException | IOException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+        }
+    }
+
+    //----------area
+    @Test
+    public void GivenStateCSV_FileFor_SortArea_ShouldReturnLowestState() {
+        try {
+            List<CSVStateCensus> result = StateCensusAnalyser.bubbleSort("getAreaInSqKm", CSV_STATE_CENSUS_DATA_PATH);
+            Assert.assertEquals("Arunachal Pradesh", result.get(0).getState());
+        } catch (StateCensusAnalyserException | IOException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+        }
+    }
+
+    @Test
+    public void GivenStateCSV_FileFor_SortArea_ShouldReturnHighestState() {
+        try {
+            List<CSVStateCensus> result = StateCensusAnalyser.bubbleSort("getAreaInSqKm", CSV_STATE_CENSUS_DATA_PATH);
+            Assert.assertEquals("Bihar", result.get(result.size() - 1).getState());
         } catch (StateCensusAnalyserException | IOException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
         }
     }
