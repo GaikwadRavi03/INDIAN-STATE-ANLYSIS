@@ -52,6 +52,21 @@ public class StateCensusAnalyser {
         return csvCensusList;
     }
 
+    public static List<CSVStateCensus> bubbleSortPopulation(String filePath) throws IOException, StateCensusAnalyserException {
+        List<CSVStateCensus> csvCensusList = findStateCount(filePath);
+        for (int i = 0; i < csvCensusList.size() - 1; i++) {
+            for (int j = 0; j < csvCensusList.size() - i - 1; j++) {
+                if (csvCensusList.get(j).getPopulation() < csvCensusList.get(j + 1).getPopulation()) {
+                    CSVStateCensus tempObj = csvCensusList.get(j);
+                    csvCensusList.set(j, csvCensusList.get(j + 1));
+                    csvCensusList.set(j + 1, tempObj);
+                }
+            }
+        }
+        writeInGson(csvCensusList);
+        return csvCensusList;
+    }
+
     private static void writeInGson(List<CSVStateCensus> csvCensusList) throws IOException {
         Gson gson = new Gson();
         String json = gson.toJson(csvCensusList);

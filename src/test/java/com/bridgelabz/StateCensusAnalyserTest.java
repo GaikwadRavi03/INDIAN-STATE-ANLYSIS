@@ -71,4 +71,22 @@ public class StateCensusAnalyserTest {
         } catch (StateCensusAnalyserException | IOException e) {
         }
     }
+
+    @Test
+    public void GivenStateCSV_FileForSortPopulation_ShouldReturnLowestPopulatedState() {
+        try {
+            List<CSVStateCensus> result = StateCensusAnalyser.bubbleSortPopulation(CSV_STATE_CENSUS_DATA_PATH);
+            Assert.assertEquals("Uttar Pradesh", result.get(0).getState());
+        } catch (StateCensusAnalyserException | IOException e) {
+        }
+    }
+
+    @Test
+    public void GivenStateCSV_FileForSortPopulation_ShouldReturnHighestPopulatedState() {
+        try {
+            List<CSVStateCensus> result = StateCensusAnalyser.bubbleSortPopulation(CSV_STATE_CENSUS_DATA_PATH);
+            Assert.assertEquals("Sikkim", result.get(result.size() - 1).getState());
+        } catch (StateCensusAnalyserException | IOException e) {
+        }
+    }
 }
